@@ -1,0 +1,13 @@
+{% extends 'base_app/base.html' %}
+{% block content %}
+    <style>
+        .center-div {
+            display: flex;
+            justify-content: center;
+            margin-top: 200px;
+        }
+    </style>
+    <div class="center-div">
+        {% include 'base_app/form.html' %}
+    </div>
+{% endblock %}

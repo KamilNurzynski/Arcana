@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'arcana_app.apps.ArcanaAppConfig',
+    'accounts.apps.AccountsConfig',
+    'base_app.apps.BaseAppConfig',
 ]
 
 MIDDLEWARE = [

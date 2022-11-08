@@ -1,0 +1,23 @@
+<style>
+    .container {
+
+        background-color: rgba(37, 41, 88, .6);
+        width: 350px;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        -webkit-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+        -moz-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+        box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+    }
+</style>
+
+<div class="container ">
+    <form class="form-group" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{{ submit_value_text }}">
+    </form>
+</div>

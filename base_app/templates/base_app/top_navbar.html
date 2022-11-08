@@ -1,0 +1,28 @@
+<style>
+    nav {
+        margin-top: 10px;
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .navbar.navbar-expand.navbar-dark li a {
+        color: antiquewhite;
+    }
+
+    .navbar.navbar-expand.navbar-dark li a:hover {
+        color: lightblue;
+    }
+</style>
+<nav class="navbar navbar-expand navbar-dark" style="background-color: rgba(95,158,160,.2);">
+    <div class="collapse navbar-collapse">
+        {% include 'base_app/links.html' %}
+{#        <form class="form-inline">#}
+{#            {% csrf_token %}#}
+{#            <input class="form-control mr-sm-2" type="search" placeholder="Szukaj na stronie" aria-label="Search">#}
+{#            <button class="btn btn-outline-light" type="submit">Szukaj</button>#}
+{#        </form>#}
+
+
+        {% include 'accounts/login_panel_to_navbar.html' %}
+    </div>
+</nav>
