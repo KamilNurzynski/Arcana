@@ -1,2 +1,2 @@
 # Arcana
-It is a project...
+It is an application to manage truck fleet.
