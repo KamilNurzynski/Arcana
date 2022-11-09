@@ -10,6 +10,9 @@ class Driver(models.Model):
     last_name = models.CharField(max_length=128)
     birth_date = models.DateField()
 
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
+
 
 class Truck(models.Model):
     country_of_registration = models.CharField(max_length=128)
@@ -18,8 +21,12 @@ class Truck(models.Model):
     brand = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
+
     # MOT = zakres dat
     # geolocation
+
+    def __str__(self):
+        return self.brand + ' ' + self.registration_number
 
 
 class Trailer(models.Model):
@@ -28,8 +35,12 @@ class Trailer(models.Model):
     year = models.CharField(max_length=4)
     brand = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
+    type = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
     # MOT = zakres dat
+
+    def __str__(self):
+        return self.type + ' ' + self.registration_number
 
 
 class Insurance(models.Model):
