@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='base_app/base.html'), name='index'),
     path('accounts/', include('accounts.urls')),
-    # path('arcana/', include('arcana_app.urls')),
+    path('arcana/', include('arcana_app.urls')),
 ]

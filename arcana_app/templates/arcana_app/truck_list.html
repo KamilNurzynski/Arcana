@@ -1,0 +1,8 @@
+{% extends 'base_app/base.html' %}
+{% block content %}
+    <table>
+        {% for obj in object_list %}
+            <tr>{{ obj }}</tr>
+        {% endfor %}
+    </table>
+{% endblock %}

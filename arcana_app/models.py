@@ -1,11 +1,12 @@
+# from django.contrib.gis.db import models
 from django.db import models
 from accounts.models import User
+from django_countries.fields import CountryField
 
 
-# Create your models here.
 class Driver(models.Model):
     id_card_type = models.CharField(max_length=128)
-    id_card_nr = models.CharField(max_length=30)
+    id_card_nr = models.CharField(max_length=30, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     birth_date = models.DateField()
@@ -15,15 +16,16 @@ class Driver(models.Model):
 
 
 class Truck(models.Model):
-    country_of_registration = models.CharField(max_length=128)
+    country_of_registration = CountryField()
     registration_number = models.CharField(max_length=15)
     year = models.CharField(max_length=4)
     brand = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
-
-    # MOT = zakres dat
-    # geolocation
+    # geolocation = models.PointField()
+    begin_MOT = models.DateField()
+    expire_MOT = models.DateField()
+    has_actual_MOT = models.BooleanField()
 
     def __str__(self):
         return self.brand + ' ' + self.registration_number
@@ -37,6 +39,7 @@ class Trailer(models.Model):
     model = models.CharField(max_length=128)
     type = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
+
     # MOT = zakres dat
 
     def __str__(self):
@@ -44,7 +47,8 @@ class Trailer(models.Model):
 
 
 class Insurance(models.Model):
-    pass
+    company_name = models.CharField(max_length=255)
+    nr_of_policy = models.CharField(max_length=255)
 
 
 class Freight(models.Model):
@@ -53,9 +57,10 @@ class Freight(models.Model):
     company = models.CharField(max_length=255)
     cargo = models.CharField(max_length=255)
     price = models.FloatField()
-    truck = models.ForeignKey(Truck)  # on_delete=models.CASCADE???
-    trailer = models.ForeignKey(Trailer)
-    insurance = models.ForeignKey(Insurance)
+    truck = models.ForeignKey(Truck, on_delete=models.CASCADE)  # on_delete=models.SET("Truck erased.")???
+    trailer = models.ForeignKey(Trailer, on_delete=models.CASCADE)
+    insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE)
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
     invoice = models.FileField()
     loading_address_company_name = models.CharField(max_length=255)
     loading_address_company_address_street = models.CharField(max_length=255)
@@ -69,6 +74,7 @@ class Freight(models.Model):
     unloading_address_company_address_postal_code = models.CharField(max_length=255)
     unloading_address_company_address_city = models.CharField(max_length=255)
     unloading_address_company_address_country = models.CharField(max_length=255)
+    text = models.TextField()
 
 
 class Service(models.Model):

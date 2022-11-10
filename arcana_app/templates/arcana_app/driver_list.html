@@ -1,0 +1,29 @@
+{% extends 'base_app/base.html' %}
+{% block content %}
+    <style>
+        .center-div {
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+        }
+
+        .table-hover {
+            width: 350px;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            color: black;
+            font-weight: bold;
+            font-size: larger;
+        }
+    </style>
+    <div class="center-div">
+        <table class="table table-hover">
+            {% for obj in object_list %}
+                <tr>
+                    <td>{{ obj }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

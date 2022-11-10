@@ -7,3 +7,4 @@ urlpatterns = [
     path('create_user/', views.RegisterView.as_view(), name='create_user'),
     path('my_account/', views.UserAccountView.as_view(), name='my_account'),
 ]
+
