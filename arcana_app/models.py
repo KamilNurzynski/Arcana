@@ -17,18 +17,20 @@ class Driver(models.Model):
 
 class Truck(models.Model):
     country_of_registration = CountryField()
-    registration_number = models.CharField(max_length=15)
+    registration_number = models.CharField(max_length=15, unique=True)
     year = models.CharField(max_length=4)
     brand = models.CharField(max_length=128)
     model = models.CharField(max_length=128)
+    color = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
     # geolocation = models.PointField()
     begin_MOT = models.DateField()
     expire_MOT = models.DateField()
-    has_actual_MOT = models.BooleanField()
+
+    # has_actual_MOT = models.BooleanField() # do wyrzucenia. to trzeba obliczyć
 
     def __str__(self):
-        return self.brand + ' ' + self.registration_number
+        return self.brand + ' ' + self.model + ' ' + self.registration_number
 
 
 class Trailer(models.Model):

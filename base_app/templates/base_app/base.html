@@ -36,10 +36,20 @@
         -o-background-size: cover;
         background-size: cover;
     }
+
+    .block-content {
+        display: flex;
+        justify-content: center;
+    }
+
 </style>
 <body>
 {% include 'base_app/top_navbar.html' %}
-{% block content %}
-{% endblock %}
+
+<div class="block-content">
+    {% block content %}
+    {% endblock %}
+</div>
+
 </body>
 </html>

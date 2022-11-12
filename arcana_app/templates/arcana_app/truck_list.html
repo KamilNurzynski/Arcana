@@ -1,8 +1,29 @@
 {% extends 'base_app/base.html' %}
 {% block content %}
-    <table>
-        {% for obj in object_list %}
-            <tr>{{ obj }}</tr>
-        {% endfor %}
-    </table>
+    <style>
+        .center-div {
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+        }
+
+        .table-hover {
+            width: 350px;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            color: black;
+            font-weight: bold;
+            font-size: larger;
+        }
+    </style>
+    <div class="center-div">
+        <table class="table table-hover">
+            {% for obj in object_list %}
+                <tr>
+                    <td><a href="{% url 'detail_truck' obj.id %}">{{ obj }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
