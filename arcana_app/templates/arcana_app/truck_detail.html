@@ -24,6 +24,8 @@
                 <td>begin_MOT</td>
                 <td>expire_MOT</td>
                 <td>is_actual_mot</td>
+                <td></td>
+                <td></td>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +41,8 @@
                 <td>{{ object.begin_MOT }}</td>
                 <td>{{ object.expire_MOT }}</td>
                 <td>{{ is_actual_mot }}</td>
+                <td><a class="btn btn-outline-secondary" href="{% url 'update_truck' object.id %}">Edit</a></td>
+                <td><a class="btn btn-outline-secondary" href="{% url 'delete_truck' object.id %}">Delete</a></td>
             </tr>
             </tbody>
         </table>

@@ -19,6 +19,7 @@
                 <td>Birth date</td>
                 <td>Id card type</td>
                 <td>Id card nr</td>
+                <td></td>
             </tr>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@
                 <td>{{ object.birth_date }}</td>
                 <td>{{ object.id_card_type }}</td>
                 <td>{{ object.id_card_nr }}</td>
+                <td><a class="btn btn-outline-secondary" href="{% url 'update_driver' object.id %}">Edit</a></td>
             </tr>
             </tbody>
         </table>

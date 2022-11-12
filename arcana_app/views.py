@@ -8,17 +8,6 @@ from django.views.generic import ListView, TemplateView, View, CreateView, Updat
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 
 
-# class AddDriverView(LoginRequiredMixin, View):
-#     def get(self, request):
-#         form = AddDriverForm()
-#         return render(request, 'arcana_app/add_objects.html', {'form': form, 'submit_value_text': 'Add'})
-#
-#     def post(self, request):
-#         form = AddDriverForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect(reverse('add_driver'))
-#         return render(request, 'arcana_app/add_objects.html', {'form': form, 'submit_value_text': 'Add'})
 class AddDriverView(LoginRequiredMixin, CreateView):
     form_class = AddDriverForm
     model = Driver
@@ -96,5 +85,10 @@ class TruckDetailView(LoginRequiredMixin, DetailView):
             is_actual_mot = 'Yes'
         else:
             is_actual_mot = 'No'
-        print(is_actual_mot)
         return super().get_context_data(is_actual_mot=is_actual_mot)
+
+
+class TruckDeleteView(LoginRequiredMixin, DeleteView):
+    model = Truck
+    template_name = 'arcana_app/truck_delete.html'
+    success_url = reverse_lazy('truck_list')

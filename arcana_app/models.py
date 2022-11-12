@@ -4,6 +4,9 @@ from accounts.models import User
 from django_countries.fields import CountryField
 
 
+# DOCUMENTS or class Documents
+
+
 class Driver(models.Model):
     id_card_type = models.CharField(max_length=128)
     id_card_nr = models.CharField(max_length=30, unique=True)
@@ -27,8 +30,6 @@ class Truck(models.Model):
     begin_MOT = models.DateField()
     expire_MOT = models.DateField()
 
-    # has_actual_MOT = models.BooleanField() # do wyrzucenia. to trzeba obliczyć
-
     def __str__(self):
         return self.brand + ' ' + self.model + ' ' + self.registration_number
 
@@ -51,11 +52,15 @@ class Trailer(models.Model):
 class Insurance(models.Model):
     company_name = models.CharField(max_length=255)
     nr_of_policy = models.CharField(max_length=255)
+    begin_date = models.DateField()
+    end_date = models.DateField()
+    price = models.FloatField()
 
 
 class Freight(models.Model):
     name = models.CharField(max_length=255)
     nr_of_freight = models.CharField(max_length=255)
+    forwarding = models.ForeignKey('Forwarding', on_delete=models.CASCADE)
     company = models.CharField(max_length=255)
     cargo = models.CharField(max_length=255)
     price = models.FloatField()
@@ -63,7 +68,6 @@ class Freight(models.Model):
     trailer = models.ForeignKey(Trailer, on_delete=models.CASCADE)
     insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
-    invoice = models.FileField()
     loading_address_company_name = models.CharField(max_length=255)
     loading_address_company_address_street = models.CharField(max_length=255)
     loading_address_company_address_local_nr = models.CharField(max_length=255)
@@ -76,7 +80,8 @@ class Freight(models.Model):
     unloading_address_company_address_postal_code = models.CharField(max_length=255)
     unloading_address_company_address_city = models.CharField(max_length=255)
     unloading_address_company_address_country = models.CharField(max_length=255)
-    text = models.TextField()
+    invoice = models.FileField()
+    notes = models.TextField()
 
 
 class Service(models.Model):
