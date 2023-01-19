@@ -43,3 +43,20 @@ class AddTruckForm(forms.ModelForm):
         #     'has_actual_MOT': forms.CheckboxInput(
         #         attrs={'class': 'required checkbox form-select', 'disabled': 'disabled or true'}),
         # }
+
+
+class AddInsuranceForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddInsuranceForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Insurance
+        fields = '__all__'
+
+    def clean(self):
+        data = super().clean()
+        if not data['begin_date'] <= data['end_date']:
+            raise ValidationError("Begin date can't be earlier than end date!")
+        return data

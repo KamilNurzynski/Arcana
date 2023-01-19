@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django import forms
 import datetime
 from django.urls import reverse_lazy, reverse
-from arcana_app.forms import AddTruckForm, AddDriverForm
+from arcana_app.forms import AddTruckForm, AddDriverForm, AddInsuranceForm
 from arcana_app.models import Driver, Truck, Trailer, Freight, Insurance, Service
 from django.views.generic import ListView, TemplateView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
@@ -23,6 +23,7 @@ class AddDriverView(LoginRequiredMixin, CreateView):
 
 
 class DriverListView(LoginRequiredMixin, ListView):
+    paginate_by = 2
     model = Driver
     template_name = 'arcana_app/driver_list.html'
 
@@ -61,6 +62,7 @@ class TruckListView(LoginRequiredMixin, ListView):
     template_name = 'arcana_app/truck_list.html'
 
 
+
 class TruckUpdateView(LoginRequiredMixin, UpdateView):
     form_class = AddTruckForm
     model = Truck
@@ -92,3 +94,13 @@ class TruckDeleteView(LoginRequiredMixin, DeleteView):
     model = Truck
     template_name = 'arcana_app/truck_delete.html'
     success_url = reverse_lazy('truck_list')
+
+
+class AddInsuranceView(LoginRequiredMixin, CreateView):
+    form_class = AddInsuranceForm
+    model = Insurance
+    template_name = 'arcana_app/add_objects.html'
+    success_url = reverse_lazy('add_insurance')
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(submit_value_text='Add insurance')
