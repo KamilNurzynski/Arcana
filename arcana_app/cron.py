@@ -17,8 +17,7 @@ def my_scheduled_job():
 
             message = client.messages.create(
                 body=f"{truck.color} {truck.brand} with reg numbers {truck.registration_number} has 20 days to MOT",
-                from_='+16198536183',
-                to='+48732190892'
+
             )
 
             print(message.sid)
