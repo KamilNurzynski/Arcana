@@ -11,8 +11,8 @@ def my_scheduled_job():
     today = date.today()
     for truck in trucks:
         if (truck.expire_MOT - today) <= timedelta(days=20):
-            account_sid = 'AC931cc13744e2966e9fe68736eaae9741'
-            auth_token = '0024a27e3eff3ae261ddfb221405898d'
+
+            
             client = Client(account_sid, auth_token)
 
             message = client.messages.create(
