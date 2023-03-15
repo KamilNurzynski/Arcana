@@ -36,20 +36,6 @@ class Truck(models.Model):
     def __str__(self):
         return self.brand + ' ' + self.model + ' ' + self.registration_number
 
-    # def save(self, *args, **kwargs):
-    #     # if (self.expire_MOT - datetime.date.today()) >= 20:
-    #
-    #         account_sid = 'AC931cc13744e2966e9fe68736eaae9741'
-    #         auth_token = '0024a27e3eff3ae261ddfb221405898d'
-    #         client = Client(account_sid, auth_token)
-    #
-    #         message = client.messages.create(
-    #             body=f"{self.color} {self.brand} with reg numbers {self.registration_number} has 20 days to MOT",
-    #             from_='+16198536183',
-    #             to='+48732190892'
-    #         )
-    #         print(message.sid)
-    #         return super().save(*args, **kwargs)
 
 
 class Trailer(models.Model):
