@@ -26,7 +26,7 @@ class Truck(models.Model):
     registration_number = models.CharField(max_length=15, unique=True)
     year = models.CharField(max_length=4)
     brand = models.CharField(max_length=128)
-    model = models.CharField(max_length=128)
+    model = models.CharField(max_length=128)  # zmienic nazwę z model na inną
     color = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
     # geolocation = models.PointField()
@@ -60,8 +60,6 @@ class Trailer(models.Model):
     model = models.CharField(max_length=128)
     type = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
-
-    # MOT = zakres dat
 
     def __str__(self):
         return self.type + ' ' + self.registration_number

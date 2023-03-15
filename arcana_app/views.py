@@ -62,7 +62,6 @@ class TruckListView(LoginRequiredMixin, ListView):
     template_name = 'arcana_app/truck_list.html'
 
 
-
 class TruckUpdateView(LoginRequiredMixin, UpdateView):
     form_class = AddTruckForm
     model = Truck
