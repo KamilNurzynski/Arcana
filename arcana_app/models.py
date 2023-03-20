@@ -26,7 +26,7 @@ class Truck(models.Model):
     registration_number = models.CharField(max_length=15, unique=True)
     year = models.CharField(max_length=4)
     brand = models.CharField(max_length=128)
-    model = models.CharField(max_length=128)  # zmienic nazwę z model na inną
+    model_name = models.CharField(max_length=128)
     color = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
     # geolocation = models.PointField()
@@ -34,8 +34,7 @@ class Truck(models.Model):
     expire_MOT = models.DateField()
 
     def __str__(self):
-        return self.brand + ' ' + self.model + ' ' + self.registration_number
-
+        return self.brand + ' ' + self.model_name + ' ' + self.registration_number
 
 
 class Trailer(models.Model):
@@ -46,25 +45,26 @@ class Trailer(models.Model):
     model = models.CharField(max_length=128)
     type = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
+    insurance = models.ForeignKey('Insurance', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.type + ' ' + self.registration_number
 
 
 class Insurance(models.Model):
-    # truck = models.ManyToManyField(Truck, through='InsuranceTruck')
     company_name = models.CharField(max_length=255)
     nr_of_policy = models.CharField(max_length=255, blank=False)
     begin_date = models.DateField()
     end_date = models.DateField()
     price = models.FloatField()
     insurance_value = models.FloatField()
+    is_actual = models.BooleanField(default=None)  # check it
 
 
 class Freight(models.Model):
     name = models.CharField(max_length=255)
     nr_of_freight = models.CharField(max_length=255)
-    forwarding = models.ForeignKey('Forwarding', on_delete=models.CASCADE)
+    forwarding = models.ForeignKey('Forwarding', on_delete=models.CASCADE, null=True)
     company = models.CharField(max_length=255)
     cargo = models.CharField(max_length=255)
     price = models.FloatField()
@@ -84,7 +84,7 @@ class Freight(models.Model):
     unloading_address_company_address_postal_code = models.CharField(max_length=255)
     unloading_address_company_address_city = models.CharField(max_length=255)
     unloading_address_company_address_country = models.CharField(max_length=255)
-    invoice = models.FileField()
+    #invoice = models.FileField() add or not add?
     # notes = models.TextField()
 
 
