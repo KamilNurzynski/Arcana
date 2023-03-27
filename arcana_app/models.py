@@ -26,12 +26,13 @@ class Truck(models.Model):
     registration_number = models.CharField(max_length=15, unique=True)
     year = models.CharField(max_length=4)
     brand = models.CharField(max_length=128)
-    model_name = models.CharField(max_length=128)
+    model = models.CharField(max_length=128)  #change to model_name
     color = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
     # geolocation = models.PointField()
     begin_MOT = models.DateField()
     expire_MOT = models.DateField()
+    insurance = models.ForeignKey('Insurance', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.brand + ' ' + self.model_name + ' ' + self.registration_number
@@ -45,7 +46,7 @@ class Trailer(models.Model):
     model = models.CharField(max_length=128)
     type = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
-    insurance = models.ForeignKey('Insurance', on_delete=models.CASCADE)
+    insurance = models.ForeignKey('Insurance', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.type + ' ' + self.registration_number
@@ -84,7 +85,7 @@ class Freight(models.Model):
     unloading_address_company_address_postal_code = models.CharField(max_length=255)
     unloading_address_company_address_city = models.CharField(max_length=255)
     unloading_address_company_address_country = models.CharField(max_length=255)
-    #invoice = models.FileField() add or not add?
+    # invoice = models.FileField() add or not add?
     # notes = models.TextField()
 
 
