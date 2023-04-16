@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 from django.urls import reverse_lazy
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q%md_98_*05sodlgb^8-=gh+o758z+6zfvx&*nalax5^%7-)kd'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -75,13 +77,15 @@ WSGI_APPLICATION = 'Arcana.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'arcana_test',
-        'HOST': 'localhost',
-        'USER': 'postgres',
-        'PASSWORD': 'coderslab'
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 
@@ -121,6 +125,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Directory to media files(photos, videos etc.)
+# MEDIA_ROOT = '/media/'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -128,7 +136,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = reverse_lazy('login')
 
-#Below are settings for background tasks written in django-contrab framework
+# Below are settings for background tasks written in django-contrab framework
 CRONJOBS = [
     ('*/1 * * * *', 'arcana_app.cron.my_scheduled_job')
 ]
+
+# Settings necessary to store media files on AWS servers (e.g. S3)
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
+
+# Setting AWS_QUERYSTRING_AUTH to False to remove query parameter authentication from generated URLs.
+# This can be useful if your S3 buckets are public.
+AWS_QUERYSTRING_AUTH = False

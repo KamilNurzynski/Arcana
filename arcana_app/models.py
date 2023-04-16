@@ -16,6 +16,8 @@ class Driver(models.Model):
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     birth_date = models.DateField()
+    pesel = models.CharField(max_length=11, unique=True)
+    photo = models.FileField(upload_to='media/')
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -26,13 +28,13 @@ class Truck(models.Model):
     registration_number = models.CharField(max_length=15, unique=True)
     year = models.CharField(max_length=4)
     brand = models.CharField(max_length=128)
-    model = models.CharField(max_length=128)  #change to model_name
+    model_name = models.CharField(max_length=128)  # change to model_name
     color = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
     # geolocation = models.PointField()
     begin_MOT = models.DateField()
     expire_MOT = models.DateField()
-    insurance = models.ForeignKey('Insurance', on_delete=models.CASCADE, default=None)
+    insurance = models.ForeignKey('Insurance', on_delete=models.CASCADE, default=None, null=True, blank=True)
 
     def __str__(self):
         return self.brand + ' ' + self.model_name + ' ' + self.registration_number
@@ -43,10 +45,10 @@ class Trailer(models.Model):
     registration_number = models.CharField(max_length=15)
     year = models.CharField(max_length=4)
     brand = models.CharField(max_length=128)
-    model = models.CharField(max_length=128)
+    model_name = models.CharField(max_length=128)
     type = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
-    insurance = models.ForeignKey('Insurance', on_delete=models.CASCADE, default=None)
+    insurance = models.ForeignKey('Insurance', on_delete=models.CASCADE, default=None, null=True, blank=True)
 
     def __str__(self):
         return self.type + ' ' + self.registration_number
@@ -59,19 +61,19 @@ class Insurance(models.Model):
     end_date = models.DateField()
     price = models.FloatField()
     insurance_value = models.FloatField()
-    is_actual = models.BooleanField(default=None)  # check it
+    is_actual = models.BooleanField(default=None)  # check it!!!!!!!!!!
 
 
 class Freight(models.Model):
     name = models.CharField(max_length=255)
     nr_of_freight = models.CharField(max_length=255)
-    forwarding = models.ForeignKey('Forwarding', on_delete=models.CASCADE, null=True)
+    forwarding = models.ForeignKey('Forwarding', on_delete=models.CASCADE, default=None, null=True, blank=True)
     company = models.CharField(max_length=255)
     cargo = models.CharField(max_length=255)
-    price = models.FloatField()
-    truck = models.ForeignKey(Truck, on_delete=models.CASCADE)  # on_delete=models.SET("Truck erased.")???
-    trailer = models.ForeignKey(Trailer, on_delete=models.CASCADE)
-    insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=15, decimal_places=2)
+    truck = models.ForeignKey(Truck, on_delete=models.CASCADE, default=None, null=True, blank=True)  # on_delete=models.SET("Truck erased.")???
+    trailer = models.ForeignKey(Trailer, on_delete=models.CASCADE, default=None, null=True, blank=True)
+    insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE, default=None, null=True, blank=True)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
     loading_address_company_name = models.CharField(max_length=255)
     loading_address_company_address_street = models.CharField(max_length=255)

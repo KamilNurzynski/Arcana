@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django import forms
 import datetime
 from django.urls import reverse_lazy, reverse
-from arcana_app.forms import AddTruckForm, AddDriverForm, AddInsuranceForm
+from arcana_app.forms import AddTruckForm, AddDriverForm, AddInsuranceForm, AddFreightForm
 from arcana_app.models import Driver, Truck, Trailer, Freight, Insurance, Service
 from django.views.generic import ListView, TemplateView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
@@ -23,7 +23,7 @@ class AddDriverView(LoginRequiredMixin, CreateView):
 
 
 class DriverListView(LoginRequiredMixin, ListView):
-    paginate_by = 2
+    paginate_by = 3
     model = Driver
     template_name = 'arcana_app/driver_list.html'
 
@@ -78,7 +78,7 @@ class TruckUpdateView(LoginRequiredMixin, UpdateView):
 
 class TruckDetailView(LoginRequiredMixin, DetailView):
     model = Truck
-    template_name = 'arcana_app/truck_detail.html'
+    template_name = 'arcana_app/truck_d`etail.html'
 
     def get_context_data(self, **kwargs):
         is_actual_mot = self.get_object().begin_MOT <= datetime.date.today() <= self.get_object().expire_MOT
@@ -103,3 +103,13 @@ class AddInsuranceView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(submit_value_text='Add insurance')
+
+
+class AddFreightView(LoginRequiredMixin, CreateView):
+    form_class = AddFreightForm
+    model = Freight
+    template_name = 'arcana_app/add_objects.html'
+    success_url = reverse_lazy('add_freight')
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(submit_value_text='Add freight')

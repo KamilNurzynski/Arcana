@@ -40,6 +40,9 @@
             {#        poniżej zamiast object_list używam page_obj. Robi sie tak, żeby działała paginacja#}
             {% for obj in page_obj %}
                 <tr>
+                    <td>
+                        <iframe src="{{ obj.photo.url }}" frameborder="0"></iframe>
+                    </td>
                     <td><a href="{% url 'detail_driver' obj.id %}">{{ obj }}</a></td>
                     {#                    class="btn btn-outline-light"#}
                 </tr>

@@ -13,6 +13,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
+                <td>Photo</td>
                 <td>id</td>
                 <td>First name</td>
                 <td>Last name</td>
@@ -24,6 +25,11 @@
             </thead>
             <tbody>
             <tr>
+                <td>
+                    {% if object.photo %}
+                        <iframe src="{{ object.photo.url }}" frameborder="0"></iframe>
+                    {% endif %}
+                </td>
                 <td>{{ object.id }}</td>
                 <td>{{ object.first_name }}</td>
                 <td>{{ object.last_name }}</td>
