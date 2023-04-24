@@ -4,13 +4,19 @@
             <a class="nav-link" href="{% url 'add_driver' %}">Add driver</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'driver_list' %}">Driver's list</a>
+            <a class="nav-link" href="{% url 'driver_list' %}">Drivers</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'add_truck' %}">Add truck</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'truck_list' %}">Truck's list</a>
+            <a class="nav-link" href="{% url 'truck_list' %}">Trucks</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_trailer' %}">Add trailer</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'trailer_list' %}">Trailers</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'add_insurance' %}">Add insurance</a>
@@ -20,3 +26,56 @@
         </li>
     </ul>
 </div>
+<!--
+<style>
+    .dropbtn {
+        margin-top: 10px;
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        margin-top: 10px;
+        font-size: large;
+        font-weight: bold;
+        background: white;
+        {#background: linear-gradient(90deg, rgba(0, 212, 255, 1) 0%, rgba(9, 9, 121, 1) 48%, rgba(0, 0, 0, 1) 100%);#}
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+<div class="dropdown">
+    <button class="dropbtn">DRIVER</button>
+    <div class="dropdown-content">
+        <a class="nav-link" href="{% url 'add_driver' %}">Add driver</a>
+        <a class="nav-link" href="{% url 'driver_list' %}">Drivers list</a>
+    </div>
+</div>
+
+-->

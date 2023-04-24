@@ -41,17 +41,19 @@ class Truck(models.Model):
 
 
 class Trailer(models.Model):
-    country_of_registration = models.CharField(max_length=128)
+    country_of_registration = CountryField()
     registration_number = models.CharField(max_length=15)
     year = models.CharField(max_length=4)
     brand = models.CharField(max_length=128)
     model_name = models.CharField(max_length=128)
     type = models.CharField(max_length=128)
     vin_nr = models.CharField(max_length=17)
+    begin_MOT = models.DateField()
+    expire_MOT = models.DateField()
     insurance = models.ForeignKey('Insurance', on_delete=models.CASCADE, default=None, null=True, blank=True)
 
     def __str__(self):
-        return self.type + ' ' + self.registration_number
+        return self.brand + ' ' + self.type + ' ' + self.registration_number
 
 
 class Insurance(models.Model):

@@ -45,6 +45,21 @@ class AddTruckForm(forms.ModelForm):
         # }
 
 
+class AddTrailerForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddTrailerForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Trailer
+        fields = '__all__'
+        widgets = {
+            'begin_MOT': DateInput(),
+            'expire_MOT': DateInput(),
+        }
+
+
 class AddInsuranceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AddInsuranceForm, self).__init__(*args, **kwargs)

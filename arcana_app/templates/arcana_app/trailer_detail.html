@@ -1,0 +1,52 @@
+{% extends 'base_app/base.html' %}
+{% block content %}
+    <style>
+        .center-div {
+            display: flex;
+            background: rgba(255, 255, 255, .8);
+            border-radius: 5px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+    <div class="center-div">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td>id</td>
+                <td>country_of_registration</td>
+                <td>registration_number</td>
+                <td>year</td>
+                <td>brand</td>
+                <td>model </td>
+                <td>type</td>
+                <td>vin_nr</td>
+                <td>begin_MOT</td>
+                <td>expire_MOT</td>
+                <td>is_actual_mot</td>
+                <td>insurance</td>
+                <td></td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ object.id }}</td>
+                <td>{{ object.country_of_registration }}</td>
+                <td>{{ object.registration_number }}</td>
+                <td>{{ object.year }}</td>
+                <td>{{ object.brand }}</td>
+                <td>{{ object.model }}</td>
+                <td>{{ object.type }}</td>
+                <td>{{ object.vin_nr }}</td>
+                <td>{{ object.begin_MOT }}</td>
+                <td>{{ object.expire_MOT }}</td>
+                <td>{{ is_actual_mot }}</td>
+                <td>{{ object.insurance }}</td>
+                <td><a class="btn btn-outline-secondary" href="{% url 'update_trailer' object.id %}">Edit</a></td>
+                <td><a class="btn btn-outline-secondary" href="{% url 'delete_trailer' object.id %}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

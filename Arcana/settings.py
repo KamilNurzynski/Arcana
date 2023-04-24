@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'base_app.apps.BaseAppConfig',
     'django_crontab',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
