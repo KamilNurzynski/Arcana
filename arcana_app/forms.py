@@ -7,6 +7,10 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
+
+
 # class CheckboxInput(forms.CheckboxInput):
 #     input_type = 'checkbox'
 
@@ -37,6 +41,7 @@ class AddTruckForm(forms.ModelForm):
         widgets = {
             'begin_MOT': DateInput(),
             'expire_MOT': DateInput(),
+
         }
 
         # widgets = {
@@ -86,3 +91,9 @@ class AddFreightForm(forms.ModelForm):
     class Meta:
         model = Freight
         fields = '__all__'
+        widgets = {
+            'date_of_loading': DateInput(),
+            'date_of_unloading': DateInput(),
+            'hour_of_loading': TimeInput(),
+            'hour_of_unloading': TimeInput(),
+        }

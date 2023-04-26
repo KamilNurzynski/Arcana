@@ -139,11 +139,10 @@ LOGIN_URL = reverse_lazy('login')
 
 # Below are settings for background tasks written in django-contrab framework
 CRONJOBS = [
-    ('*/1 * * * *', 'arcana_app.cron.my_scheduled_job')
+    ('*/1440 * * * *', 'arcana_app.cron.my_scheduled_job')
 ]
 
 # Settings necessary to store media files on AWS servers (e.g. S3)
-
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")

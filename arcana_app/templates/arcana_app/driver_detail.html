@@ -8,6 +8,10 @@
             justify-content: center;
             margin-top: 20px;
         }
+        td{
+            justify-content: center;
+            align-content: center;
+        }
     </style>
     <div class="center-div">
         <table class="table table-hover">
@@ -20,6 +24,7 @@
                 <td>Birth date</td>
                 <td>Id card type</td>
                 <td>Id card nr</td>
+                <td></td>
                 <td></td>
             </tr>
             </thead>
@@ -37,6 +42,7 @@
                 <td>{{ object.id_card_type }}</td>
                 <td>{{ object.id_card_nr }}</td>
                 <td><a class="btn btn-outline-secondary" href="{% url 'update_driver' object.id %}">Edit</a></td>
+                <td><a class="btn btn-outline-secondary" href="{% url 'delete_driver' object.id %}">Delete</a></td>
             </tr>
             </tbody>
         </table>

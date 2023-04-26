@@ -73,10 +73,15 @@ class Freight(models.Model):
     company = models.CharField(max_length=255)
     cargo = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=15, decimal_places=2)
-    truck = models.ForeignKey(Truck, on_delete=models.CASCADE, default=None, null=True, blank=True)  # on_delete=models.SET("Truck erased.")???
+    truck = models.ForeignKey(Truck, on_delete=models.CASCADE, default=None, null=True,
+                              blank=True)  # on_delete=models.SET("Truck erased.")???
     trailer = models.ForeignKey(Trailer, on_delete=models.CASCADE, default=None, null=True, blank=True)
     insurance = models.ForeignKey(Insurance, on_delete=models.CASCADE, default=None, null=True, blank=True)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    date_of_loading = models.DateField(default=None, null=True, blank=True)
+    hour_of_loading = models.TimeField(default=None, null=True, blank=True)
+    date_of_unloading = models.DateField(default=None, null=True, blank=True)
+    hour_of_unloading = models.TimeField(default=None, null=True, blank=True)
     loading_address_company_name = models.CharField(max_length=255)
     loading_address_company_address_street = models.CharField(max_length=255)
     loading_address_company_address_local_nr = models.CharField(max_length=255)
@@ -89,8 +94,13 @@ class Freight(models.Model):
     unloading_address_company_address_postal_code = models.CharField(max_length=255)
     unloading_address_company_address_city = models.CharField(max_length=255)
     unloading_address_company_address_country = models.CharField(max_length=255)
+
     # invoice = models.FileField() add or not add?
     # notes = models.TextField()
+
+    def __str__(self):
+        return self.company + ' ' + self.name + ' Loading: ' \
+            + str(self.date_of_loading) + ' Unloading: ' + str(self.date_of_unloading)
 
 
 class Service(models.Model):

@@ -1,0 +1,45 @@
+{% extends 'base_app/base.html' %}
+{% block content %}
+    <style>
+        .center-div {
+            display: flex;
+            background: rgba(255, 255, 255, .8);
+            border-radius: 5px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+    </style>
+    <div class="center-div">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td>Name</td>
+                <td>Nr of freight</td>
+                <td>Cargo</td>
+                <td>Price</td>
+                <td>Driver</td>
+                <td>Truck</td>
+                <td>Trailer</td>
+                <td>Insurance</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ object.name }}</td>
+                <td>{{ object.nr_of_freight }}</td>
+                <td>{{ object.cargo }}</td>
+                <td>{{ object.price }}</td>
+                <td>{{ object.driver }}</td>
+                <td>{{ object.truck }}</td>
+                <td>{{ object.trailer }}</td>
+                <td>{{ object.insurance }}</td>
+
+                <td></td>
+                <td><a class="btn btn-outline-secondary" href="{% url 'update_freight' object.id %}">Edit</a></td>
+                <td><a class="btn btn-outline-secondary" href="{% url 'delete_freight' object.id %}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

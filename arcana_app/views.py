@@ -8,6 +8,12 @@ from django.views.generic import ListView, TemplateView, View, CreateView, Updat
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 
 
+# from django.conf import settings
+# from django.http import HttpResponse
+# from django.template.loader import get_template
+# from xhtml2pdf import pisa
+
+
 class AddDriverView(LoginRequiredMixin, CreateView):
     form_class = AddDriverForm
     model = Driver
@@ -91,6 +97,12 @@ class TruckDetailView(LoginRequiredMixin, DetailView):
         return super().get_context_data(is_actual_mot=is_actual_mot)
 
 
+class DriverDeleteView(LoginRequiredMixin, DeleteView):
+    model = Driver
+    template_name = 'arcana_app/driver_delete.html'
+    success_url = reverse_lazy('driver_list')
+
+
 class TruckDeleteView(LoginRequiredMixin, DeleteView):
     model = Truck
     template_name = 'arcana_app/truck_delete.html'
@@ -164,3 +176,36 @@ class AddFreightView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(submit_value_text='Add freight')
+
+
+class FreightListView(LoginRequiredMixin, ListView):
+    paginate_by = 3
+    model = Freight
+    template_name = 'arcana_app/freight_list.html'
+    # ordering = ['']
+
+
+class FreightUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = AddFreightForm
+    model = Freight
+    template_name = 'arcana_app/add_objects.html'
+    success_url = reverse_lazy('freight_list')
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(submit_value_text='Edit freight')
+
+
+############################################################
+class FreightDetailView(LoginRequiredMixin, DetailView):
+    model = Freight
+    template_name = 'arcana_app/freight_detail.html'
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(attrs=[key for key in Freight.__dict__.keys() if not key.startswith('_')])
+
+
+############################################################
+class FreightDeleteView(LoginRequiredMixin, DeleteView):
+    model = Freight
+    template_name = 'arcana_app/freight_delete.html'
+    success_url = reverse_lazy('freight_list')

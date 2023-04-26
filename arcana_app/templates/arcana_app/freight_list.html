@@ -1,3 +1,32 @@
+{#{% extends 'base_app/base.html' %}#}
+{#{% block content %}#}
+{#    <style>#}
+{#        .center-div {#}
+{#            display: flex;#}
+{#            justify-content: center;#}
+{#            margin-top: 100px;#}
+{#        }#}
+{##}
+{#        .table-hover {#}
+{#            width: 350px;#}
+{#            padding: 20px;#}
+{#            border-radius: 10px;#}
+{#            color: black;#}
+{#            font-weight: bold;#}
+{#            font-size: larger;#}
+{#        }#}
+{#    </style>#}
+{#    <div class="center-div">#}
+{#        <table class="table table-hover">#}
+{#            {% for obj in object_list %}#}
+{#                <tr>#}
+{#                    <td><a href="{% url 'detail_freight' obj.id %}">{{ obj }}</a></td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#        </table>#}
+{#    </div>#}
+{#{% endblock %}#}
+
 {% extends 'base_app/base.html' %}
 {% block content %}
     <style>
@@ -33,11 +62,6 @@
             margin-top: 10px;
         }
 
-        td {
-            text-align: center;
-            vertical-align: middle;
-        }
-
 
     </style>
     <div class="center-div">
@@ -45,11 +69,7 @@
             {#        poniżej zamiast object_list używam page_obj. Robi sie tak, żeby działała paginacja#}
             {% for obj in page_obj %}
                 <tr>
-                    <td>
-                        <iframe src="{{ obj.photo.url }}" frameborder="0"></iframe>
-                    </td>
                     <td><a href="{% url 'detail_driver' obj.id %}">{{ obj }}</a></td>
-                    {#                    class="btn btn-outline-light"#}
                 </tr>
             {% endfor %}
         </table>

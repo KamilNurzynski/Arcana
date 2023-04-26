@@ -5,13 +5,14 @@ from datetime import date, timedelta
 
 def my_scheduled_job():
     '''
-    Background task with interval set in settings. Function send SMS when is information that MOT expires
+    Background task with interval set in settings. Function send SMS when is information that MOT expires.
+    Function sends message one time when 20 days left to mot expiration.
     '''
     
     trucks = Truck.objects.all()
     today = date.today()
     for truck in trucks:
-        if (truck.expire_MOT - today) <= timedelta(days=20):
+        if (truck.expire_MOT - today) == timedelta(days=20):
 
             
             client = Client(account_sid, auth_token)

@@ -1,0 +1,17 @@
+{% extends 'base_app/base.html' %}
+{% block content %}
+    <style>
+        .form-control {
+            width: auto;
+            justify-content: center;
+            margin-top: 100px;
+        }
+    </style>
+    <div class="form-control">
+        <h5>Do you want to delete {{ object }}?</h5>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+{% endblock %}
