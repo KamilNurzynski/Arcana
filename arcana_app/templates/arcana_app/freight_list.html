@@ -69,7 +69,7 @@
             {#        poniżej zamiast object_list używam page_obj. Robi sie tak, żeby działała paginacja#}
             {% for obj in page_obj %}
                 <tr>
-                    <td><a href="{% url 'detail_driver' obj.id %}">{{ obj }}</a></td>
+                    <td><a href="{% url 'detail_freight' obj.id %}">{{ obj }}</a></td>
                 </tr>
             {% endfor %}
         </table>

@@ -70,7 +70,6 @@ class Freight(models.Model):
     name = models.CharField(max_length=255)
     nr_of_freight = models.CharField(max_length=255)
     forwarding = models.ForeignKey('Forwarding', on_delete=models.CASCADE, default=None, null=True, blank=True)
-    company = models.CharField(max_length=255)
     cargo = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=15, decimal_places=2)
     truck = models.ForeignKey(Truck, on_delete=models.CASCADE, default=None, null=True,
@@ -99,8 +98,9 @@ class Freight(models.Model):
     # notes = models.TextField()
 
     def __str__(self):
-        return self.company + ' ' + self.name + ' Loading: ' \
-            + str(self.date_of_loading) + ' Unloading: ' + str(self.date_of_unloading)
+        return self.name + '. ' + 'Loading: ' + self.loading_address_company_name + ' ' + str(
+            self.date_of_loading) + '.' + ' Unloading: ' + self.unloading_address_company_name + ' ' + str(
+            self.date_of_unloading) + '.'
 
 
 class Service(models.Model):
