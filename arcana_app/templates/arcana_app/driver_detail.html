@@ -8,7 +8,8 @@
             justify-content: center;
             margin-top: 20px;
         }
-        td{
+
+        td {
             justify-content: center;
             align-content: center;
         }
@@ -24,6 +25,7 @@
                 <td>Birth date</td>
                 <td>Id card type</td>
                 <td>Id card nr</td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -43,6 +45,8 @@
                 <td>{{ object.id_card_nr }}</td>
                 <td><a class="btn btn-outline-secondary" href="{% url 'update_driver' object.id %}">Edit</a></td>
                 <td><a class="btn btn-outline-secondary" href="{% url 'delete_driver' object.id %}">Delete</a></td>
+                <td><a class="btn btn-outline-secondary" download="{{ download_url }}" href="{{ download_url }}">Download photo</a></td>
+
             </tr>
             </tbody>
         </table>

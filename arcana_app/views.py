@@ -3,10 +3,13 @@ from django import forms
 import datetime
 from django.urls import reverse_lazy, reverse
 from arcana_app.forms import AddDriverForm, AddTrailerForm, AddTruckForm, AddInsuranceForm, AddFreightForm
-from arcana_app.models import Driver, Truck, Trailer, Freight, Insurance, Service
+from arcana_app.models import Driver, Truck, Trailer, Freight, Insurance, ServiceVisit
 from django.views.generic import ListView, TemplateView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
-
+from django.http.response import FileResponse
+import boto3
+from decouple import config
+from Arcana import settings
 
 # from django.conf import settings
 # from django.http import HttpResponse
@@ -22,10 +25,6 @@ class AddDriverView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(submit_value_text='Add driver')
-    # def get_form(self, form_class):
-    #     form = super(AddDriverView, self).get_form(form_class)
-    #     form.fields['birth_date'].widget = forms.DateInput()
-    #     return form
 
 
 class DriverListView(LoginRequiredMixin, ListView):
@@ -52,6 +51,26 @@ class DriverUpdateView(LoginRequiredMixin, UpdateView):
 class DriverDetailView(LoginRequiredMixin, DetailView):
     model = Driver
     template_name = 'arcana_app/driver_detail.html'
+
+    # def get(self, request, *args, **kwargs):
+    #     super().get(request, *args, **kwargs)
+    #     photo = self.object
+    #     return FileResponse(open(song, 'rb'),
+    #                         as_attachment=True,
+    #                         filename=f'{song.artist} - {song.title}.mp3')
+
+    def get_context_data(self, **kwargs):
+        client = boto3.client('s3', aws_access_key_id=config('AWS_ACCESS_KEY_ID'), aws_secret_access_key = config('AWS_SECRET_ACCESS_KEY'))
+        bucket_name = config('AWS_STORAGE_BUCKET_NAME')
+        file_name = self.object.photo.url
+
+        url = client.generate_presigned_url(
+            'get_object',
+            Params={
+                'Bucket': bucket_name,
+                'Key': file_name.name, },
+            ExpiresIn=600, )
+        return super().get_context_data(download_url= url)
 
 
 class AddTruckView(LoginRequiredMixin, CreateView):
